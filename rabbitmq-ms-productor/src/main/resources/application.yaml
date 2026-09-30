@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: rabbitmq-ms-productor
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+    virtual-host: /
+server:
+  port: 8080
