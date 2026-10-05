@@ -1,6 +1,7 @@
 package cl.duoc.rabbitmq_ms_productor;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/messages")
+@CrossOrigin(origins = "*")
 public class MessageController {
     private final Sender sender;
 
@@ -15,10 +17,10 @@ public class MessageController {
         this.sender = sender;
     }
 
-    // Recibe la Routing Key y el mensaje desde la solicitud REST
     @PostMapping
     public ResponseEntity<String> sendMessage(
             @RequestBody MessageRequest request) {
+        // Envia usando level y message como en la guía 2
         sender.sendMessage(
                 request.level(),
                 request.message()
@@ -29,7 +31,6 @@ public class MessageController {
         );
     }
 
-    // Representa el cuerpo JSON recibido
     public record MessageRequest(
             String level,
             String message) {

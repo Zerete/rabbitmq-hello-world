@@ -1,0 +1,38 @@
+<main class="container">
+  <h1>RabbitMQ - Frontend Angular</h1>
+  <p>
+    Enviar un mensaje al microservicio Productor
+  </p>
+
+
+  <label for="message">Mensaje</label>
+  <input
+    id="message"
+    type="text"
+    [(ngModel)]="message"
+    placeholder="Escribe un mensaje"
+  >
+
+
+  <label for="level">Routing Key</label>
+  <select
+    id="level"
+    [(ngModel)]="level"
+  >
+    <option value="INFO">INFO</option>
+    <option value="WARNING">WARNING</option>
+    <option value="ERROR">ERROR</option>
+  </select>
+
+
+  <button (click)="sendMessage()">
+    Enviar mensaje
+  </button>
+
+
+  @if (response) {
+    <p class="response">
+      {{ response }}
+    </p>
+  }
+</main>
