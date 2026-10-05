@@ -11,8 +11,17 @@ public class Sender {
         this.rabbitTemplate = rabbitTemplate;
     }
 
-    public void sendMessage(String message) {
-        rabbitTemplate.convertAndSend("hello", message);
-        System.out.println("[✓] Mensaje enviado: " + message);
+    // Publica el mensaje en el Exchange utilizando la severidad
+    // como Routing Key.
+    public void sendMessage(String level, String message) {
+        rabbitTemplate.convertAndSend(
+                "logs.direct",
+                level,
+                message
+        );
+        System.out.println(
+                "[✓] Mensaje enviado - Routing Key: "
+                        + level + " - " + message
+        );
     }
 }

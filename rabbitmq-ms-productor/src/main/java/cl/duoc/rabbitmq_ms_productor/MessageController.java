@@ -15,12 +15,23 @@ public class MessageController {
         this.sender = sender;
     }
 
+    // Recibe la Routing Key y el mensaje desde la solicitud REST
     @PostMapping
-    public ResponseEntity<String> sendMessage(@RequestBody MessageRequest request) {
-        sender.sendMessage(request.message());
-        return ResponseEntity.ok("Mensaje enviado: " + request.message());
+    public ResponseEntity<String> sendMessage(
+            @RequestBody MessageRequest request) {
+        sender.sendMessage(
+                request.level(),
+                request.message()
+        );
+        return ResponseEntity.ok(
+                "Mensaje enviado con Routing Key: "
+                        + request.level()
+        );
     }
 
-    public record MessageRequest(String message) {
+    // Representa el cuerpo JSON recibido
+    public record MessageRequest(
+            String level,
+            String message) {
     }
 }
